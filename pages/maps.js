@@ -100,7 +100,7 @@ class Maps extends React.Component {
     });
   
   
-    var marker = [];//some array
+ 
     var bounds = new google.maps.LatLngBounds();
     for (var i = 0; i < marker.length; i++) {
      bounds.extend(marker[i]);
