@@ -189,7 +189,7 @@ class Maps extends React.Component {
      
 
      
-          <div id="map" className='w-full h-full'/>
+          <div id="map" className='w-full h-80'/>
         
      
       </div>
