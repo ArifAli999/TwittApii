@@ -45,12 +45,11 @@ export default function MyModal() {
     setIsOpen(false)
     
   
-    // setTimeout just for the example , cause it will load quickly without it .
   }
   
 
-  const handleClickEvent = (e) => {
-    e.preventDefault();
+  const handleClickEvent = () => {
+ 
     const form = nameForm.current
     console.log(form['firstname'].value)
 
@@ -62,13 +61,13 @@ export default function MyModal() {
         },
         body: JSON.stringify(form['firstname'].value)
       })
-   toast('he')
+   toast('Tweeted')
       setIsOpen(false)
      
 
     }
     else {
-      
+      toast('Please type atleast 3 words')
 
     }
     

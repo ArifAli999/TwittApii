@@ -17,7 +17,7 @@ export default async (req, res) =>{
     var T = new Twit({
         consumer_key: process.env.TWITTER_CONSUMER_KEY,
         consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-        access_token: token.twitter.accessToken,
+        access_token_key: token.twitter.accessToken,
         access_token_secret: token.twitter.refreshToken
       });
       
