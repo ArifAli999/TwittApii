@@ -7,6 +7,8 @@ export default NextAuth({
     TwitterProvider({
       clientId: process.env.TWITTER_CONSUMER_KEY,
       clientSecret: process.env.TWITTER_CONSUMER_SECRET,
+    
+
     }),
     // ...add more providers here
   ],
@@ -15,16 +17,24 @@ export default NextAuth({
       if (account.provider && !token [account.provider]) {
         token[account.provider] = {};
       }
-      if(account.accessToken) {
-        token[account.provider].accessToken = account.accessToken;
+      if(account.oauth_token) {
+        token[account.provider].accessToken = account.oauth_token;
       }
-      if (account.refreshToken) {
-        token [account.provider].refreshToken = account.refreshToken
+      if (account.oauth_token_secret) {
+        token [account.provider].refreshToken = account.oauth_token_secret;
       }
-        console.log(token)
-        console.log(account)
+
         return token
+       
     
+      },
+
+      async redirect({ url, baseUrl }) {
+        // Allows relative callback URLs
+        if (url.startsWith("/")) return `${baseUrl}${url}`
+        // Allows callback URLs on the same origin
+        else if (new URL(url).origin === baseUrl) return url
+        return baseUrl
       }
   },
   secret: process.env.NEXTAUTH_SECRET

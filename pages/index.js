@@ -49,8 +49,8 @@ export default function Home() {
       }
       {!session &&
         <>
-          Not signed in <br />
-          <button onClick={() => signIn()}>Sign in</button>
+         <Header username="Guest"/>
+         
         </>}
     </div>
   )

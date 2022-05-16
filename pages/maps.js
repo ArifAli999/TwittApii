@@ -6,7 +6,7 @@ class Maps extends React.Component {
   constructor(props) {
     super(props);
     this.renderMap = this.renderMap.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
+  
     this.handleClick = this.handleClick.bind(this);
     this.state = {
       input: "",
@@ -45,15 +45,14 @@ class Maps extends React.Component {
       
     }
     setTimeout(() => {
-        this.handleClick() //  $ is available here
+        this.handleClick() //  delay so that the DOM can totally load and 'google' will not return as undefined. 
     }, 4000)
   }
 
+
+  // Map function.
+
   renderMap() {
-
-
-  
-
     const coords = { lat: -25.363, lng: 131.044}
     const myLatLng = { lat: -25.363, lng: 131.044 };
     const { data } = this.state;
@@ -119,15 +118,7 @@ class Maps extends React.Component {
 
 
 
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.type === "checkbox" ? target.checked : target.value;
-    const name = target.name;
-
-    this.setState({
-      [name]: value
-    });
-  }
+ 
 
   handleClick() {
     const geocoder = new google.maps.Geocoder();
@@ -138,7 +129,7 @@ class Maps extends React.Component {
 
 
 
-  // THIS CRASHES if you comment it out //
+  // Geocoding the geolocated tweets using Geocode API provided by Google.
 
 
   codeAddress(geocoder) {
@@ -176,6 +167,9 @@ class Maps extends React.Component {
     });
 }
 
+
+// Rendering the here.
+
   render() {
     const { data } = this.state;
     
@@ -199,6 +193,6 @@ class Maps extends React.Component {
 }
 
 /*
- * Render the above component into the div#app
+ *export
  */
 export default Maps
