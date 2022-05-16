@@ -29,5 +29,5 @@ export default async (req, res) =>{
 
    
 
-    return res.status(200).json({ status: 'ok', body: body});
+    return res.status(200).json({ status: 'ok', data: body});
   }
