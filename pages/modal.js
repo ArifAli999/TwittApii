@@ -142,7 +142,7 @@ export default function MyModal() {
                       <button
                         type="button"
                         className="inline-flex justify-center  border-2 border-teal-500 bg-transparent px-4 py-2 text-sm font-medium text-teal-300 hover:opacity-40 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                        onClick={myPromise}
+                        onClick={handleClickEvent}
                       >
                         Post
                       </button>
