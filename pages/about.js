@@ -37,8 +37,8 @@ function About() {
            <p className='text-base p-4 text-stone-200'>
                This application was deployed on <b>Google Cloud Compute Engine VM.</b><br/>
                <br/> It was also tested and succesfully deployed on AWS EC2 but Google Cloud was preffered due to the fact that I had a lot of free Google Cloud Credits which were used for this project.
-             Since this is a modern web applciation, Something like AWS amplify would've been the better choice in terms of practicality but a VM was selected only for the purpose of this project as it was taught in the coursework,
-             Another very interesting and industrially used technique for deploying a NodeJS application is by 'Dockerizing', Using dockers web apps can be easily and very quickly deployed in matter of minutes. Morever not only that but it has also been 
+             Since this is a modern web applciation, Something like AWS amplify wouldve been the better choice in terms of practicality but a VM was selected only for the purpose of this project as it was taught in the coursework,
+             Another very interesting and industrially used technique for deploying a NodeJS application is by Dockerizing, Using dockers web apps can be easily and very quickly deployed in matter of minutes. Morever not only that but it has also been 
              suggested and proven that Docker apps are extremely lightweight which means there is no performance or startup penalty
              </p>
 
@@ -51,7 +51,7 @@ function About() {
                  <li className='text-base p-4 text-stone-50'>
                  Then we simply had to install the content of our application by running <span className='text-xs italic'>npm i</span> & <span className='text-xs italic'>npm run build</span></li>
                  <li className='text-base p-4 text-stone-50'>
-                 In the final step we just had to run our application using PM2 and this was done by simply using the command <span className='italic'>pm2 start npm name "next" start</span></li>
+                 In the final step we just had to run our application using PM2 and this was done by simply using the command <span className='italic'>pm2 start npm name next start</span></li>
 
 
          
