@@ -1,8 +1,8 @@
 import React from 'react'
 import { getSession, signIn, signOut, useSession } from 'next-auth/react';
 import MyModal from '../pages/modal';
-import { AiOutlineLogout, AiOutlineLogin} from 'react-icons/ai'
-
+import { AiOutlineLogout, AiOutlineLogin, AiFillInfoCircle, AiFillHome} from 'react-icons/ai'
+import Link from 'next/link';
 function Header({username}) {
     const { data: session } = useSession()
 
@@ -12,6 +12,16 @@ function Header({username}) {
     <div className='bg-black text-white '>
       <ul className='inline-flex w-full items-center'>
         <li className='md:ml-5 font-bold text-left list-none flex-1'>Welcome Back, {username}</li>
+        <li className='list-none mr-5 cursor-pointer hover:opacity-70 hover:duration-300 transition-all ease-in hover:text-teal-400'>
+        <Link href="/">
+          <AiFillHome size={20}/>
+          </Link>
+          </li>
+        <li className='list-none mr-5 cursor-pointer hover:opacity-70 hover:duration-300 transition-all ease-in hover:text-teal-400'>
+        <Link href="/about">
+          <AiFillInfoCircle size={20}/>
+          </Link>
+          </li>
         <li className='font-bold list-none text-right mr-2'><button className=' text-white  p-2  font-light cursor-pointer hover:opacity-70 hover:duration-300 transition-all ease-in hover:text-teal-400' onClick={() => signOut()}><AiOutlineLogout size={20}/></button></li>
         <li className='list-none'><MyModal/></li>
         </ul>
@@ -22,6 +32,16 @@ function Header({username}) {
     <div className='bg-black text-white '>
     <ul className='inline-flex w-full items-center p-4'>
       <li className='md:ml-5 font-bold text-left list-none flex-1'>Welcome back {username}, Please sign in</li>
+      <li className='list-none mr-5 cursor-pointer hover:opacity-70 hover:duration-300 transition-all ease-in hover:text-teal-400'>
+        <Link href="/">
+          <AiFillHome size={20}/>
+          </Link>
+          </li>
+      <li className='list-none mr-5 cursor-pointer hover:opacity-70 hover:duration-300 transition-all ease-in hover:text-teal-400'>
+        <Link href="/about">
+          <AiFillInfoCircle size={20}/>
+          </Link>
+          </li>
       <li className='list-none'><button onClick={() => signIn()}><AiOutlineLogin size={20} className="hover:opacity-80 hover:text-teal-500 hover:duration-500 transition-all ease-in "/></button></li>
       </ul>
   </div>

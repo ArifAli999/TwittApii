@@ -22,7 +22,7 @@ export default async (req, res) => {
 
   try {
     // fetch tweets by query!
-    const results = await client.get('search/tweets.json?q=%23uk&count=10');
+    const results = await client.get('search/tweets.json?q=%23climatechange OR %23netzero&count=10');
 
 
     return res.status(200).json({

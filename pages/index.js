@@ -2,7 +2,6 @@ import Head from 'next/head'
 import { useState, useEffect, useRef } from 'react';
 import { getSession, signIn, signOut, useSession } from 'next-auth/react';
 import Header from '../components/Head';
-import { GoogleMap, LoadScript, Marker , ScriptLoaded} from '@react-google-maps/api';
 import Feed from '../components/Feed';
 import Maps from './maps';
 import WeatherWidget from './weather';
@@ -12,50 +11,42 @@ import WeatherWidget from './weather';
 export default function Home() {
   const [statuses, setStatuses] = useState([]);
   const { data: session } = useSession()
-  const [cords, setCords] = useState([]);
-
-
-  
-
-
-
-
-
-  const position = {
-    lat: 37.772,
-    lng: -122.214
-  }
-  
-
-
 
 
   return (
-    <div className='mb-10'>
-      {
-        session &&
-        <>
+    <><Head>
+      <title>Sustainable North East</title>
+    </Head>
+      <div className='mb-10'>
 
-          <Header username={session?.user?.name}/>
-          <WeatherWidget/>
-         
-          <div className='grid grid-cols-1 md:grid-cols-2 md:gap-6 mt-10 md:mr-5 md:ml-5'>
+{/**Here we check if user is logged in, If they are then we display the feed and map else ask them to sign in. */}
 
-         <Feed/>
-         <div className='text-bold p-2 bg-red-500'> <Maps/></div>
-         
-         </div>
-           
+        {session &&
+          <>
 
-          </>
+            <Header username={session?.user?.name} />
+            <WeatherWidget />
 
-      }
-      {!session &&
-        <>
-         <Header username="Guest"/>
-         
-        </>}
-    </div>
+            <div className='grid grid-cols-1 md:grid-cols-2 md:gap-6 mt-10 md:mr-5 md:ml-5'>
+
+              <Feed />
+              <div className='text-bold p-2 '> <Maps /></div>
+
+            </div>
+
+
+          </>}
+        {!session &&
+          <>
+            <Header username="Guest" />
+            <WeatherWidget />
+            <div className='container mx-auto mt-20'>
+              <h1 className='text-2xl p-2'>Please sign in to view all the features</h1>
+            </div>
+
+
+          </>}
+      </div></>
   )
 
 

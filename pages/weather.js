@@ -20,7 +20,7 @@ function WeatherWidget() {
     
 
   return (
-    <div className='p-2 text-black font-bold mr-5 ml-5'>
+    <div className='p-2 text-black font-bold mr-5 ml-5 text-right'>
    
             <p className='text-bold'>City: <span className='text-teal-600'>{results.name}</span></p>
             <p className='text-bold'>Temp: <span className='text-teal-600'>{results.main && results.main.temp}</span></p>

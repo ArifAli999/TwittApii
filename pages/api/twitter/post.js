@@ -1,7 +1,7 @@
 import Twitter from 'twitter-lite';
 import { getSession } from 'next-auth/react'
 import { getToken } from 'next-auth/jwt';
-var Twit = require('twit')
+
 
 export default async (req, res) =>{
 

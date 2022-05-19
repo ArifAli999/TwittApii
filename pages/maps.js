@@ -4,7 +4,6 @@ var map;
 var marker;
 var directionsService;
 var directionsRenderer;
-var st = "Newcastle"
 
 class Maps extends React.Component {
   constructor(props) {
@@ -18,7 +17,7 @@ class Maps extends React.Component {
       data: null,
       results: null,
     };
-    
+
 
   }
 
@@ -26,18 +25,19 @@ class Maps extends React.Component {
 
   componentDidMount() {
 
+    // twitter geolocated tweets fetch
 
     fetch('api/twitter/')
       .then(response => response.json())
       .then(data => this.setState({ data })
       );
 
-  
 
-     
-      
-      
-  
+
+
+
+
+
 
 
 
@@ -49,7 +49,7 @@ class Maps extends React.Component {
       document.body.appendChild(
         Object.assign(document.createElement("script"), {
           type: "text/javascript",
-        
+
           src:
             "https://maps.googleapis.com/maps/api/js?key=AIzaSyBDjrEvzcrnMQLq7eY6c2TgOdfK9l5a4JQ",
           onload: () => this.renderMap()
@@ -70,10 +70,9 @@ class Maps extends React.Component {
   // Map function.
   renderMap() {
 
-    const coords = { lat: -25.363, lng: 131.044 }
-    const myLatLng = { lat: -25.363, lng: 131.044 };
-    var pointA = new google.maps.LatLng(51.7519, -1.2578);
-    var pointB = new google.maps.LatLng(50.8429, -0.1313);
+    var pointA = new google.maps.LatLng(54.976713, -1.60728);
+
+
     const { data } = this.state;
     const el = document.getElementById("map");
     directionsService = new google.maps.DirectionsService();
@@ -99,9 +98,9 @@ class Maps extends React.Component {
         content: contentString,
       });
       const marker = new google.maps.Marker({
-        position: myLatLng,
+        position: pointA,
         map,
-        title: "Uluru (Ayers Rock)",
+        title: "Sustainable North East (NE8)",
       });
 
       marker.addListener("click", () => {
@@ -143,12 +142,7 @@ class Maps extends React.Component {
   }
 
 
-  delta (st) {
-    if(st.length>1){
-    this.setState( (state,props) =>  ({current: st}));
-    }
 
-}
 
   // Geocoding the geolocated tweets using Geocode API provided by Google.
 
@@ -161,7 +155,7 @@ class Maps extends React.Component {
         'address': d?.place?.full_name
       }, function (results, status) {
         if (status === "OK") {
-      
+
 
           // Looping over the geocode results and redering markers based on it.
           for (var i = 0; i < results.length; i++) {
@@ -174,12 +168,12 @@ class Maps extends React.Component {
 
 
 
-            // Setting custom marker icons - Icon 1 
+            // Setting custom marker icons - 
 
 
 
 
-            if (d?.text.includes('#netzero') ) {
+            if (d?.text.includes('#netzero')) {
               marker = new google.maps.Marker({
 
                 position: results[i].geometry.location,
@@ -240,24 +234,24 @@ class Maps extends React.Component {
 
 
 
-
+            // Directions & Distance
 
             marker.addListener("click", () => {
 
-         
-           
-           
-            
+
+
+
+
 
               setTimeout(() => {
                 var pointA = new google.maps.LatLng(54.976713, -1.60728);
 
-              st = this.delta(st);
+
 
 
                 var request = {
-                  origin: pointA,
-                  destination: location,
+                  origin: location,
+                  destination: pointA,
                   travelMode: 'DRIVING'
                 };
                 directionsService.route(request, function (result, status) {
@@ -308,11 +302,11 @@ class Maps extends React.Component {
 
 
         <div id="map" className='w-full h-80' />
-        <div id="directionsPanel" className='float-right w-30 h-full text-white'></div>
+        <div id="directionsPanel" className='h-full text-white'></div>
 
         <br />
 
-   
+
       </div>
     );
   }

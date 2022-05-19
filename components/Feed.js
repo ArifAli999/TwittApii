@@ -14,7 +14,7 @@ function Feed() {
 
     const { data, error } = useSWRImmutable('/api/twitter/search', fetcher)
 
-    console.log(data)
+   
     if (error) return <div>failed to load</div>
     if (!data) return <div>loading...</div>
     return (
