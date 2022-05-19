@@ -22,7 +22,7 @@ function About() {
             <br/>
             There was no particular need to use jQuery as taught in the coursework due to using a more modern JavaScript framework which is capable of doing all that, This made things a lot more easier and organized. 
             <br/> <br/>
-            The authentication setup can be found in <span className='font-serif text-stone-200'>pages/api/auth/[...nextauth].js</span>
+            The authentication setup can be found in <span className='font-serif text-stone-200'>pages/api/auth/</span>
             <br/>
             Similary, A server side library was used to interact with the Twitter API and also the restricted Twitter endpoints, From the callbacks of our OAuth we are able to fetch each logged in users
             access tokens which can be found in the `callbacks` of the file mentioned earlier, These tokens were then used by the Twitter library to let users interact with the restricted endpoints.
@@ -44,14 +44,17 @@ function About() {
 
              <p className='text-base p-4 text-stone-50'>
                  However for this application, A traditional approach was followed in which a VM was configured with all the necessary details and requirements.
-                 <br/> This VM was then further configured and provided a NodeJS envrionment to run our application. This was done by refering to the documentation provided by AWS on how to install NodeJS on VMs<br/><br/>
-                 After installing NodeJS, A web server had to be configured, For this purpose <b className='text-pink-500'>NGINX</b> was used to configure and setup our webserver.<br/><br/>
-                 Next step was to keep this server running, For this purpose another advanced product and process manager for Node.js was used known as <b className='text-pink-500'>PM2.</b>
-                 Then we simply had to install the content of our application by running <span className='text-xs italic'>npm i</span> & <span className='text-xs italic'>npm run build</span><br/>
-                 In the final step we just had to run our application using PM2 and this was done by simply using the command <span className='italic'>pm2 start npm --name "next" -- start</span>
+                 <br/> This VM was then further configured and provided a NodeJS envrionment to run our application. This was done by refering to the documentation provided by AWS on how to install NodeJS on VMs
+                 After installing NodeJS, A web server had to be configured, For this purpose <b className='text-pink-500'>NGINX</b> was used to configure and setup our webserver.</p>
+                 <li className='text-base p-4 text-stone-50'>
+                 Next step was to keep this server running, For this purpose another advanced product and process manager for Node.js was used known as <b className='text-pink-500'>PM2.</b></li>
+                 <li className='text-base p-4 text-stone-50'>
+                 Then we simply had to install the content of our application by running <span className='text-xs italic'>npm i</span> & <span className='text-xs italic'>npm run build</span></li>
+                 <li className='text-base p-4 text-stone-50'>
+                 In the final step we just had to run our application using PM2 and this was done by simply using the command <span className='italic'>pm2 start npm name "next" start</span></li>
 
 
-             </p>
+         
 
              <p className='text-base p-4 text-stone-100'>
                  All the necessary security precautions were put in place while configuring this VM as well and more details regarding that can be found in the project video.
