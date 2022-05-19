@@ -3,7 +3,7 @@ import Header from '../components/Head'
 import { getSession, signIn, signOut, useSession } from 'next-auth/react';
 
 
-export default function () {
+export default function About() {
     const { data: session } = useSession()
   return (
     <div>
