@@ -1,7 +1,6 @@
 import React from 'react'
 import Header from '../components/Head'
 import { getSession, signIn, signOut, useSession } from 'next-auth/react';
-import React from 'react'
 
 
 
