@@ -1,9 +1,12 @@
 import React from 'react'
 import Header from '../components/Head'
 import { getSession, signIn, signOut, useSession } from 'next-auth/react';
+import React from 'react'
 
 
-export default function About() {
+
+
+function About() {
     const { data: session } = useSession()
   return (
     <div>
@@ -67,3 +70,4 @@ export default function About() {
     </div>
   )
 }
+export default About
