@@ -2,6 +2,12 @@ import Twitter from 'twitter-lite';
 import { getSession } from 'next-auth/react'
 import { getToken } from 'next-auth/jwt';
 
+
+// This is the api route created to fetch tweets that have a geoloocation attatched to them.
+// The fetching for the tweet list component is done in the /api/twitter/search.js file.
+// Seperate fetch for this makes it easier to make a map of markers.
+
+
 export default async (req, res) => {
 
 
@@ -22,7 +28,7 @@ export default async (req, res) => {
 
   try {
     // fetch tweets by query!
-    const results = await client.get('search/tweets.json?q=%23derrygirls&count=500');
+    const results = await client.get('search/tweets.json?q= %23climatechange OR %23netzero&count=100');
 
 
     return res.status(200).json({

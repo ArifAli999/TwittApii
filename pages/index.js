@@ -5,6 +5,7 @@ import Header from '../components/Head';
 import { GoogleMap, LoadScript, Marker , ScriptLoaded} from '@react-google-maps/api';
 import Feed from '../components/Feed';
 import Maps from './maps';
+import WeatherWidget from './weather';
 
 
 
@@ -14,6 +15,7 @@ export default function Home() {
   const [cords, setCords] = useState([]);
 
 
+  
 
 
 
@@ -35,6 +37,7 @@ export default function Home() {
         <>
 
           <Header username={session?.user?.name}/>
+          <WeatherWidget/>
          
           <div className='grid grid-cols-1 md:grid-cols-2 md:gap-6 mt-10 md:mr-5 md:ml-5'>
 

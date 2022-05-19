@@ -4,17 +4,22 @@ var map;
 var marker;
 var directionsService;
 var directionsRenderer;
+var st = "Newcastle"
 
 class Maps extends React.Component {
   constructor(props) {
     super(props);
     this.renderMap = this.renderMap.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.codeAddress = this.codeAddress.bind(this);
+
 
     this.state = {
-      input: "",
       data: null,
+      results: null,
     };
+    
+
   }
 
 
@@ -27,8 +32,15 @@ class Maps extends React.Component {
       .then(data => this.setState({ data })
       );
 
+  
 
-    // ADD API KEY HERE
+     
+      
+      
+  
+
+
+
     if (
       !document.querySelectorAll(
         `[src="${"https://maps.googleapis.com/maps/api/js?key=AIzaSyBDjrEvzcrnMQLq7eY6c2TgOdfK9l5a4JQ"}"]`
@@ -37,7 +49,7 @@ class Maps extends React.Component {
       document.body.appendChild(
         Object.assign(document.createElement("script"), {
           type: "text/javascript",
-          // ADD API KEY HERE
+        
           src:
             "https://maps.googleapis.com/maps/api/js?key=AIzaSyBDjrEvzcrnMQLq7eY6c2TgOdfK9l5a4JQ",
           onload: () => this.renderMap()
@@ -78,10 +90,9 @@ class Maps extends React.Component {
         '<div id="content">' +
         '<div id="siteNotice">' +
         "</div>" +
-        '<h1 id="firstHeading" class="firstHeading">Uluru</h1>' +
+        '<h1 id="firstHeading" class="firstHeading">Sustainable North East</h1><br>' +
         '<div id="bodyContent">' +
-        "<p><b>Uluru</b>Test data.</p>" +
-        "<p> More tweet details</p>" +
+        "<p><b>Newcastle, NE8</b></p>" +
         "</div>" +
         "</div>";
       const infowindow = new google.maps.InfoWindow({
@@ -91,18 +102,6 @@ class Maps extends React.Component {
         position: myLatLng,
         map,
         title: "Uluru (Ayers Rock)",
-      });
-      const markerA = new google.maps.Marker({
-        position: pointA,
-        title: "point A",
-        label: "A",
-        map: map
-      });
-      const markerB = new google.maps.Marker({
-        position: pointB,
-        title: "point B",
-        label: "B",
-        map: map
       });
 
       marker.addListener("click", () => {
@@ -144,68 +143,150 @@ class Maps extends React.Component {
   }
 
 
+  delta (st) {
+    if(st.length>1){
+    this.setState( (state,props) =>  ({current: st}));
+    }
 
+}
 
   // Geocoding the geolocated tweets using Geocode API provided by Google.
 
 
   codeAddress(geocoder) {
-
+    var marker;
     var data = this.state.data;
-    var address = data?.data.map((d) => (
+    var address = data?.data.map((d) => {
+      geocoder.geocode({
+        'address': d?.place?.full_name
+      }, function (results, status) {
+        if (status === "OK") {
+      
 
-      d?.place && d.place.country && (d?.place?.full_name)
+          // Looping over the geocode results and redering markers based on it.
+          for (var i = 0; i < results.length; i++) {
+            var location = results[i].formatted_address;
+            var endpt
 
-    ));
-
-
-
-    geocoder.geocode({
-      'address': address.join()
-    }, function (results, status) {
-      if (status === "OK") {
-        console.log(results)
-
-        for (var i = 0; i < results.length; i++) {
-          var location = results[i].formatted_address;
-          var endpt
-
-          console.log(location)
-          var marker = new google.maps.Marker({
-            position: results[i].geometry.location,
-            map: map
-          });
-
-          marker.addListener("click", () => {
+            var climateIcon = 'https://i.imgur.com/LAQn67u.png';
+            var combinedIcon = 'https://i.imgur.com/DxF4udF.png';
+            var netZero = 'https://i.imgur.com/JQZfZGn.png';
 
 
 
-            setTimeout(() => {
-              var pointA = new google.maps.LatLng(51.7519, -1.2578);
-              var pointB = new google.maps.LatLng(51.5390261, -0.1425516);
+            // Setting custom marker icons - Icon 1 
 
-              var request = {
-                origin: pointA,
-                destination: location,
-                travelMode: 'DRIVING'
-              };
-              directionsService.route(request, function (result, status) {
-                if (status == 'OK') {
-                  directionsRenderer.setDirections(result);
-                }
+
+
+
+            if (d?.text.includes('#netzero') ) {
+              marker = new google.maps.Marker({
+
+                position: results[i].geometry.location,
+                map: map,
+                title: d?.user.name,
+                icon: climateIcon
               });
 
 
-            }, 4000)
-          });
+            }
+
+
+            else if (d?.text.includes('#climatechange')) {
+              marker = new google.maps.Marker({
+                position: results[i].geometry.location,
+                map: map,
+                title: d?.user.name,
+                icon: netZero
+              });
+
+            }
+
+
+
+            else {
+              return null
+            }
+
+
+
+            google.maps.event.addListener(marker, 'mouseover', (function (marker, i) {
+
+              return function () {
+
+                infowindow.open(map, marker);
+              }
+
+            })(marker, i));
+
+            google.maps.event.addListener(marker, 'mouseout', (function (marker, i) {
+
+              return function () {
+
+                infowindow.close();
+              }
+
+            })(marker, i));
+
+
+
+            const infowindow = new google.maps.InfoWindow({
+              content: `<p><b>${d?.user.name}</b></p><br/>` +
+                `<p>${d?.text}</p>`
+
+            });
+
+
+
+
+
+
+
+            marker.addListener("click", () => {
+
+         
+           
+           
+            
+
+              setTimeout(() => {
+                var pointA = new google.maps.LatLng(54.976713, -1.60728);
+
+              st = this.delta(st);
+
+
+                var request = {
+                  origin: pointA,
+                  destination: location,
+                  travelMode: 'DRIVING'
+                };
+                directionsService.route(request, function (result, status) {
+                  if (status == 'OK') {
+                    directionsRenderer.setDirections(result);
+                  }
+                });
+
+
+              }, 2000)
+            });
+
+          }
+          return marker
+
 
         }
+        else {
+          return null
+        }
+      }
 
 
-      }
-      else {
-        return null
-      }
+      );
+
+
+
+
+
     });
   }
 
@@ -231,7 +312,7 @@ class Maps extends React.Component {
 
         <br />
 
-        <button >Route</button>
+   
       </div>
     );
   }
