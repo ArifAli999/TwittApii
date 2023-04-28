@@ -15,7 +15,7 @@ export default async (req, res) =>{
       req,
       secret: process.env.NEXTAUTH_SECRET
     });
-    console.log(token.twitter.accessToken)
+
   
     const client = new Twitter({
       subdomain: 'api',
